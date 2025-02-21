@@ -8,6 +8,14 @@ export 'models/icloud_file.dart';
 /// The main class for the plugin. Contains all the API's needed for listing,
 /// uploading, downloading and deleting files.
 class ICloudStorage {
+
+  /// Prerequisites
+  /// In iCloud Drive Documents, need to ensure that iCloud is available.
+  ///
+  static Future<bool> icloudAvailable() async {
+    return await ICloudStoragePlatform.instance.icloudAvailable();
+  }
+
   /// Get all the files' meta data from iCloud container
   ///
   /// [containerId] is the iCloud Container Id.

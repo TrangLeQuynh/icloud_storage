@@ -17,6 +17,11 @@ class MockIcloudStoragePlatform
   String get uploadDestinationRelativePath => _uploadDestinationRelativePath;
 
   @override
+  Future<bool> icloudAvailable() async {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<List<ICloudFile>> gather({
     required String containerId,
     StreamHandler<List<ICloudFile>>? onUpdate,

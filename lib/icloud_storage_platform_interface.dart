@@ -26,6 +26,10 @@ abstract class ICloudStoragePlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  Future<bool> icloudAvailable() async {
+    throw UnimplementedError('icloudAvailable() has not been implemented.');
+  }
+
   /// Gather all the files' meta data from iCloud container.
   ///
   /// [containerId] is the iCloud Container Id.

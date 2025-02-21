@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import CloudKit
+import Foundation
 
 public class SwiftIcloudStoragePlugin: NSObject, FlutterPlugin {
   var listStreamHandler: StreamHandler?
@@ -17,6 +19,8 @@ public class SwiftIcloudStoragePlugin: NSObject, FlutterPlugin {
   
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
+    case "icloudAvailable":
+      icloudAvailable(call, result)
     case "gather":
       gather(call, result)
     case "upload":
@@ -32,6 +36,17 @@ public class SwiftIcloudStoragePlugin: NSObject, FlutterPlugin {
     default:
       result(FlutterMethodNotImplemented)
     }
+  }
+  
+
+  // [ubiquityIdentityToken]
+  // An opaque token that represents the current user’s iCloud Drive Documents identity.
+  // In iCloudDrive Documents, when iCloud available,this property contains an opaque object representing the identity of the current user.
+  // If iCloud is unavailable or there is no logged-in user, the value of this property is nil.
+  // Accessing the value of this property is relatively fast, so you can check the value at launch time from your app’s main thread.
+  private func icloudAvailable(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    let status = FileManager.default.ubiquityIdentityToken != nil
+    result(status)
   }
   
   private func gather(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
